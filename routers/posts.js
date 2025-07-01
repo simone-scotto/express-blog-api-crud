@@ -21,6 +21,15 @@ router.get(`/`, function (req, res) {
 router.get("/:id", function (req, res) {
   const id = parseInt(req.params.id);
   const post = posts.find((post) => post.id === id);
+
+  if (!post) {
+    res.status(404);
+
+    return res.json({
+      error: "Not Found",
+      message: "Item not found",
+    });
+  }
   res.json(post);
 });
 
@@ -34,7 +43,7 @@ router.delete("/:id", function (req, res) {
   if (!post) {
     return res.status(404).json({
       error: true,
-      message: "not found",
+      message: "items not found",
     });
   }
 
