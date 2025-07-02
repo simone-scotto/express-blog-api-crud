@@ -1,24 +1,14 @@
-const express = require("express");
+const posts = require("../data/posts");
 
-const router = express.Router();
-
-const posts = require(`../data/posts`);
-
-const postController = require("../controller/controller");
-//INDEX
-
-/* router.get(`/`, function (req, res) {
+function index(req, res) {
   let filteredPosts = posts;
 
   if (req.query.tags) {
     filteredPosts = posts.filter((post) => post.tags.includes(req.query.tags));
   }
   res.json(filteredPosts);
-});
-
-// SHOW
-
-router.get("/:id", function (req, res) {
+}
+function show(req, res) {
   const id = parseInt(req.params.id);
   const post = posts.find((post) => post.id === id);
 
@@ -31,11 +21,8 @@ router.get("/:id", function (req, res) {
     });
   }
   res.json(post);
-});
-
-// STORE
-
-router.post("/", function (req, res) {
+}
+function store(req, res) {
   const newId = posts[posts.length - 1].id + 1;
   const newPost = {
     id: newId,
@@ -51,11 +38,8 @@ router.post("/", function (req, res) {
 
   res.status(201);
   res.json(newPost);
-});
-
-// UPDATE
-
-router.put("/:id", function (req, res) {
+}
+function update(req, res) {
   const id = parseInt(req.params.id);
 
   const post = posts.find((post) => post.id === id);
@@ -76,11 +60,8 @@ router.put("/:id", function (req, res) {
   console.log(posts);
 
   res.json(post);
-});
-
-// DESTROY
-
-router.delete("/:id", function (req, res) {
+}
+function destroy(req, res) {
   const id = parseInt(req.params.id);
 
   const post = posts.find((post) => post.id === id);
@@ -96,18 +77,6 @@ router.delete("/:id", function (req, res) {
   console.log(posts);
 
   res.sendStatus(204);
-}); */
+}
 
-router.get("/", postController.index);
-
-router.get("/:id", postController.show);
-
-router.post("/", postController.store);
-
-router.put("/:id", postController.update);
-
-router.patch("/:id", postController.update);
-
-router.delete("/:id", postController.destroy);
-
-module.exports = router;
+module.exports = { index, show, store, update, destroy };
