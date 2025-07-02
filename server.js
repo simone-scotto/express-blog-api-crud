@@ -4,6 +4,8 @@ const app = express();
 
 const port = 3050;
 
+app.use(express.json());
+
 const routersPost = require(`./routers/posts`);
 
 app.listen(port, () => {
