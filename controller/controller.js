@@ -4,7 +4,9 @@ function index(req, res) {
   let filteredPosts = posts;
 
   if (req.query.tags) {
-    filteredPosts = posts.filter((post) => post.tags.includes(req.query.tags));
+    filteredPosts = posts.filter((post) =>
+      post.tags.map((tag) => tag.toLowerCase()).includes(req.query.tags)
+    );
   }
   res.json(filteredPosts);
 }
